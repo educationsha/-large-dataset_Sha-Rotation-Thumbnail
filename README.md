@@ -1,4 +1,9 @@
-# The Sha Rotation Thumbnail (SRT) Algorithm for Thumbnail Extraction in AI Output Report Generation: A Real-Time Focus
+# The Sha Rotation Thumbnail (SRT) Algorithm for Thumbnail Extraction in AI Output Report Generation: A Real-Time Focus Rotational Algorithm Enhancing AI Detection in UAV Imagery
+Thumbnails
+Muthuselvam. M ∗ and Senthil Kumar. K†
+Anna University, Chennai, Tamilnadu,600044 India.
+Shahul Hameed Chettali‡
+Anna University, Chennai, Tamil Nadu, 600044 India.
 
 <p align="center">
 <img width="1000px" alt="SRT Workflow" src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/dron_bac_removed.png">
