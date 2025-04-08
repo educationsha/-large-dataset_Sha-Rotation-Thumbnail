@@ -1,5 +1,5 @@
 # The Sha Rotation Thumbnail (SRT) Algorithm for Thumbnail Extraction in AI Output Report Generation: A Real-Time Focus Rotational Algorithm Enhancing AI Detection in UAV Imagery
-
+Author Shahul Hameed Chettali
 
 <p align="center">
 <img width="1000px" alt="SRT Workflow" src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/dron_bac_removed.png">
