@@ -4,7 +4,19 @@
 
 The project investigates whether evaluating detected regions across **0°, 90°, 180°, and 270° rotations** can improve the alignment and presentation of detected objects in automated AI output reports.
 
-> **Research artifact:** This repository contains the implementation and experimental material associated with the SRT research work. Reported performance values should be interpreted in the context of the documented dataset, experimental protocol, and baseline comparison.
+> **Research artifact:** This repository contains the implementation and experimental material associated with the SRT research work and its published book chapter, **“Enhancing Drone Object Detection Through Rotational Thumbnail Correction Algorithm.”**
+
+## 📚 Published Book Chapter
+
+This research has been published as a chapter in:
+
+**Book:** *Proceedings of the Second International Conference on Aeronautical Sciences, Engineering and Technology, Volume 2*
+
+**Chapter title:** *Enhancing Drone Object Detection Through Rotational Thumbnail Correction Algorithm*
+
+**DOI:** [10.1007/978-981-95-6445-3](https://doi.org/10.1007/978-981-95-6445-3)
+
+The publication provides an additional scholarly reference for the SRT research presented in this repository.
 
 ## Research Problem
 
@@ -118,6 +130,14 @@ For a reproducible release, the next engineering version should:
 - provide a requirements file and reproducible environment;
 - separate dataset configuration from algorithm code.
 
+## Research Publication
+
+### Book Chapter
+
+**Shahul Hameed C.** “Enhancing Drone Object Detection Through Rotational Thumbnail Correction Algorithm.” In: *Proceedings of the Second International Conference on Aeronautical Sciences, Engineering and Technology, Volume 2*.
+
+**DOI:** https://doi.org/10.1007/978-981-95-6445-3
+
 ## Example Workflow
 
 ```python
@@ -172,14 +192,16 @@ Before reproducing the reported experiments, document:
 
 ## Citation
 
-If you use or discuss this implementation, please cite the associated research publication/patent where applicable.
+If you use or discuss this implementation, please cite the published book chapter where applicable.
 
 ```bibtex
-@software{srt_uav_object_detection,
-  author  = {Shahul Hameed C},
-  title   = {Rotation-Aware UAV Object Detection and Thumbnail Extraction (SRT)},
-  year    = {2026},
-  url     = {https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail}
+@incollection{srt_rotational_thumbnail_2026,
+  author    = {Shahul Hameed C},
+  title     = {Enhancing Drone Object Detection Through Rotational Thumbnail Correction Algorithm},
+  booktitle = {Proceedings of the Second International Conference on Aeronautical Sciences, Engineering and Technology},
+  volume    = {2},
+  year      = {2026},
+  doi       = {10.1007/978-981-95-6445-3}
 }
 ```
 
