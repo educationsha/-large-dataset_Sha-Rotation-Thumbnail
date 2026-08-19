@@ -1,82 +1,195 @@
-# The Sha Rotation Thumbnail (SRT) Algorithm for Thumbnail Extraction in AI Output Report Generation: A Real-Time Focus Rotational Algorithm Enhancing AI Detection in UAV Imagery
-Author Shahul Hameed Chettali
+# Rotation-Aware UAV Object Detection and Thumbnail Extraction (SRT)
 
-<p align="center">
-<img width="1000px" alt="SRT Workflow" src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/dron_bac_removed.png">
-</p>
-<p align="center"><a href="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail">[<img src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/thumbnails.bmp" width="20px"> Dataset Summary]</a> | <a href="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Sha%20Rotation%20Thumbnail%20(SRT)%20algorithm.py">[🛠️ SRT Algorithm Code]</a> | <a href="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Dataset_Enhancing%20Drone%20Object%20Detection%20Accuracy%20in%20Surveillance%20Real-Time%20Evaluation%20of%20YOLOv5%20and%20the%20New%20Sha%20Rotation%20Thumbnail%20Algorithm.xlsx">[📊 Dataset Excel]</a></p>
-<p align="center">
-  <a href="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Dataset%20filelist"><b>Explore Dataset Filelist</b> 📂</a>
-</p>
-<hr>
+**Sha Rotation Thumbnail (SRT)** is a lightweight rotation-aware post-processing approach for generating consistently oriented object thumbnails from UAV imagery after object detection.
 
-## Aim of the SRT Algorithm
+The project investigates whether evaluating detected regions across **0°, 90°, 180°, and 270° rotations** can improve the alignment and presentation of detected objects in automated AI output reports.
 
-Object detection and localization are critical in real-time image processing for applications like autonomous navigation, surveillance, and AI-driven content extraction. However, traditional models like YOLOv5 often fail to generate accurate thumbnails due to misaligned bounding boxes, even when objects are correctly identified. To address this, we present the Sha Rotation Thumbnail Algorithm (SRT), which enhances alignment and orientation by rotating detected objects at 0°, 90°, 180°, and 270°. This approach ensures precise thumbnail generation, even for skewed or rotated objects. 
+> **Research artifact:** This repository contains the implementation and experimental material associated with the SRT research work. Reported performance values should be interpreted in the context of the documented dataset, experimental protocol, and baseline comparison.
 
-Using the DH Q4 drone equipped with RGB and IR sensors, 7,425 aerial images were captured, with 5,197 used for training and 1,114 for validation and testing. Performance analysis revealed that SRT significantly outperformed YOLOv5. SRT achieved a mean Precision of 0.919 (SD = 0.012) versus YOLOv5's 0.844 (SD = 0.013), Recall of 0.875 (SD = 0.011) compared to YOLOv5's 0.793 (SD = 0.014), and an F1-Score of 0.896 (SD = 0.010) against YOLOv5's 0.818 (SD = 0.012). Statistical tests confirmed these improvements, with t-statistics of 19.433 for Precision, 21.135 for Recall, and 23.284 for F1-Score (all p < .001). Levene's test indicated equal variances, supporting the robustness of the findings.
+## Research Problem
 
----
+Object detectors such as YOLOv5 can localize an object successfully while the extracted thumbnail remains poorly oriented or visually misaligned. This is particularly relevant to aerial imagery, where object orientation, camera viewpoint, and scene geometry can vary substantially.
 
-## Overview of the Dataset
+SRT addresses the **thumbnail extraction and orientation problem after detection**, rather than modifying the underlying YOLOv5 detector architecture.
 
-<p align="center">
-<img src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/thumbnails.bmp" alt="Dataset Overview" width="70%">
-</p>
+## Proposed Approach
 
-The dataset comprises 7,425 drone-captured images with varying lighting conditions and object orientations:
+The SRT workflow is conceptually:
 
-- **Training Images**: 5,197
-- **Validation and Testing Images**: 1,114 each
-
-[Dataset Summary](https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Dataset%20filelist) | [Download Excel Dataset](https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Dataset_Enhancing%20Drone%20Object%20Detection%20Accuracy%20in%20Surveillance%20Real-Time%20Evaluation%20of%20YOLOv5%20and%20the%20New%20Sha%20Rotation%20Thumbnail%20Algorithm.xlsx)
-
----
-
-## Key Features of the SRT Algorithm
-
-<p align="center">
-<img src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/dron_bac_removed.png" alt="SRT Process" width="70%">
-</p>
-
-1. **Rotation-Based Alignment**: Applies rotations at 0°, 90°, 180°, and 270° to optimize object orientation.
-2. **Integration with YOLOv5**: Designed to enhance post-detection accuracy without modifying the YOLOv5 model.
-3. **Lightweight and Efficient**: Minimal computational overhead, suitable for real-time applications.
-
----
-
-## Results and Performance Metrics
-
-- **Precision**: Improved from 0.844 (YOLOv5) to 0.919 (SRT)
-- **Recall**: Increased from 0.793 (YOLOv5) to 0.875 (SRT)
-- **F1-Score**: Enhanced from 0.818 (YOLOv5) to 0.896 (SRT)
-
-Statistical tests confirmed the significance of these improvements (all p < .001). 
-
----
-
-## How to Use the SRT Algorithm
-
-### Code for the Sha Rotation Thumbnail Algorithm:
-[GitHub Link](https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/Sha%20Rotation%20Thumbnail%20(SRT)%20algorithm.py)
-
-```python
-from srt_algorithm import SRT
-
-# Example usage
-srt = SRT()
-thumbnails = srt.generate_thumbnails(image, bounding_boxes)
+```text
+UAV Image
+   │
+   ▼
+Object Detection (e.g., YOLOv5)
+   │
+   ▼
+Detected Bounding Box
+   │
+   ├── 0° rotation
+   ├── 90° rotation
+   ├── 180° rotation
+   └── 270° rotation
+   │
+   ▼
+Candidate Object Thumbnails
+   │
+   ▼
+Orientation / Alignment Selection
+   │
+   ▼
+Final Thumbnail
 ```
 
----
+The repository's current implementation provides the rotation-and-cropping prototype used for the experimental workflow. The selection criterion should be treated as an area for further engineering/reproducibility work because the prototype currently initializes a candidate and does not implement a quantitative alignment score.
 
-## Visualization of Outputs
+## Dataset
 
-<p align="center">
-<img src="https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail/blob/main/thumbnails.bmp" alt="Output Example" width="70%">
-</p>
+The experimental work described in the accompanying research material uses **7,425 UAV aerial images** captured using a DH Q4 drone equipped with RGB and IR sensing.
 
-The generated thumbnails demonstrate superior alignment and orientation, satisfying real-world application needs.
+Reported split:
 
-This Excel document contains folder,	name,	size,	URL, and 	type.
+| Split | Images |
+|---|---:|
+| Training | 5,197 |
+| Validation | 1,114 |
+| Testing | 1,114 |
+| **Total** | **7,425** |
 
+The dataset contains variation in lighting conditions and object orientations.
+
+> **Dataset note:** Do not assume that the full source imagery is redistributed by this repository. Use the included dataset/file-list material to determine what is actually available for reproduction.
+
+## Reported Results
+
+The research material reports the following comparison with a YOLOv5 baseline:
+
+| Metric | YOLOv5 | SRT | Improvement |
+|---|---:|---:|---:|
+| Precision | 0.844 | **0.919** | +0.075 |
+| Recall | 0.793 | **0.875** | +0.082 |
+| F1-score | 0.818 | **0.896** | +0.078 |
+
+Reported variability:
+
+- SRT Precision: **0.919 ± 0.012**
+- SRT Recall: **0.875 ± 0.011**
+- SRT F1-score: **0.896 ± 0.010**
+
+The accompanying research analysis reports statistical tests with **p < 0.001** for the Precision, Recall, and F1-score comparisons.
+
+### Interpretation
+
+The reported results indicate that the SRT workflow improved the evaluated metrics relative to the stated YOLOv5 baseline under the experimental setup. These values are **reported experimental results**, not a claim that SRT universally improves every object-detection task.
+
+## Key Contributions
+
+1. **Rotation-aware thumbnail extraction** using four right-angle orientations.
+2. **Detector-independent post-processing concept** that can be applied after object detection.
+3. **Lightweight implementation** based on image transformation and cropping.
+4. **UAV-focused evaluation** using a large aerial-image collection.
+5. **Quantitative comparison** against a YOLOv5 baseline.
+
+## Implementation
+
+The main prototype is:
+
+`Sha Rotation Thumbnail (SRT) algorithm.py`
+
+It uses Python and Pillow to:
+
+1. Read bounding-box coordinates.
+2. Load the corresponding image.
+3. Generate 0°, 90°, 180°, and 270° rotated views.
+4. Crop the detected region.
+5. Resize the crop to a thumbnail.
+6. Encode the resulting thumbnail as JPEG/Base64 for report generation.
+
+### Current prototype limitations
+
+The current script contains experiment-specific configuration, including a local Windows image directory. It should therefore be treated as a **research prototype rather than a plug-and-play package**.
+
+For a reproducible release, the next engineering version should:
+
+- replace hard-coded paths with command-line/configuration arguments;
+- implement an explicit quantitative alignment/quality score;
+- select the best rotation based on that score rather than the first candidate;
+- validate bounding-box coordinates after rotation;
+- add automated tests;
+- provide a requirements file and reproducible environment;
+- separate dataset configuration from algorithm code.
+
+## Example Workflow
+
+```python
+# Conceptual workflow
+rotations = [0, 90, 180, 270]
+
+for rotation in rotations:
+    rotated_image = rotate(image, rotation)
+    candidate = crop(rotated_image, bounding_box)
+    score = alignment_score(candidate)
+
+best_thumbnail = select_highest_scoring_candidate()
+```
+
+The code above illustrates the intended research workflow; the repository's existing Python script is the reference prototype.
+
+## Repository Contents
+
+Typical research artifacts include:
+
+- SRT algorithm prototype
+- UAV imagery / thumbnail examples
+- Dataset file-list material
+- Experimental dataset documentation
+- Research visualizations
+- Supporting spreadsheet material
+
+## Research Context
+
+This work sits at the intersection of:
+
+- **UAV computer vision**
+- **Object detection**
+- **Aerial imagery analysis**
+- **Rotation-aware image processing**
+- **Edge/real-time AI**
+- **Automated visual reporting**
+
+## Reproducibility Checklist
+
+Before reproducing the reported experiments, document:
+
+- [ ] Dataset version and provenance
+- [ ] Exact train/validation/test split
+- [ ] YOLOv5 version and model variant
+- [ ] Training hyperparameters
+- [ ] Hardware and software environment
+- [ ] Random seeds
+- [ ] Evaluation procedure
+- [ ] Statistical-test procedure
+- [ ] SRT alignment-selection criterion
+
+## Citation
+
+If you use or discuss this implementation, please cite the associated research publication/patent where applicable.
+
+```bibtex
+@software{srt_uav_object_detection,
+  author  = {Shahul Hameed C},
+  title   = {Rotation-Aware UAV Object Detection and Thumbnail Extraction (SRT)},
+  year    = {2026},
+  url     = {https://github.com/educationsha/-large-dataset_Sha-Rotation-Thumbnail}
+}
+```
+
+## Author
+
+**Dr. Shahul Hameed C**  
+AI Researcher & Engineer | Computer Vision | UAV Intelligence | Edge AI | Autonomous Systems
+
+GitHub: https://github.com/educationsha
+
+## License
+
+No explicit open-source license is currently declared for this repository. If you intend external reuse, add an appropriate license and clarify the redistribution status of any datasets or third-party materials.
